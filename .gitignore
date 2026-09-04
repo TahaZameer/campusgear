@@ -1,0 +1,12 @@
+#environment
+.venv/
+
+#python cache
+__pycache__/
+*.pyc
+
+#testing cache
+.pytest_cache/
+
+#sensitive environment variables
+.env
