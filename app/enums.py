@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ItemStatus(str, Enum):
     available = 'available'
     requested = 'requested'

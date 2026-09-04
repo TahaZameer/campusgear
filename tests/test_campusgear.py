@@ -1,12 +1,14 @@
-import pytest
-from app.main import app
-from app.database import LocalSession
-from app.models import User, Category, Item, LoanRequest, LoanEvent
-from app.enums import Role, ItemCondition, ItemStatus, LoanStatus, LoanEventType
-from app.auth import password_hashing
-from app.schemas import Token
-from fastapi.testclient import TestClient
 from datetime import date, datetime
+
+import pytest
+from fastapi.testclient import TestClient
+
+from app.auth import password_hashing
+from app.database import LocalSession
+from app.enums import ItemCondition, ItemStatus, LoanEventType, LoanStatus, Role
+from app.main import app
+from app.models import Category, Item, LoanEvent, LoanRequest, User
+
 
 @pytest.fixture
 def client():

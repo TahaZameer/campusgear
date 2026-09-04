@@ -1,13 +1,13 @@
-from fastapi import Depends
+from datetime import date, datetime
+from typing import cast
+
 from fastapi.exceptions import HTTPException
-from sqlalchemy import select, or_
+from sqlalchemy import select
 from sqlalchemy.orm import Session
-from typing import Annotated, cast
-from .database import get_db
-from .auth import get_current_user
-from .models import User, LoanRequest, Item, LoanEvent
-from .enums import Role, LoanStatus, ItemStatus, LoanEventType
-from datetime import datetime, date
+
+from .enums import ItemStatus, LoanEventType, LoanStatus, Role
+from .models import Item, LoanEvent, LoanRequest, User
+
 
 def approve_request(request_id: int, db: Session, user: User, decision_reason: str | None):
     if cast(Role, user.role) == Role.member:

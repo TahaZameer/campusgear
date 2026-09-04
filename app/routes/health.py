@@ -1,9 +1,11 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+
 from ..database import get_db
-from typing import Annotated
 
 router = APIRouter()
 

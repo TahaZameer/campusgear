@@ -1,8 +1,19 @@
-from sqlalchemy import Column, String, Integer, Boolean, ForeignKey, Date, DateTime, func, Enum as SqlEnum
-from .enums import ItemStatus, LoanStatus, Role
+from sqlalchemy import (
+    Boolean,
+    Column,
+    Date,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    func,
+)
+from sqlalchemy import Enum as SqlEnum
 from sqlalchemy.orm import relationship
+
 from .database import Base
-from .enums import Role, ItemCondition, LoanEventType
+from .enums import ItemCondition, ItemStatus, LoanEventType, LoanStatus, Role
+
 
 class User(Base):
     __tablename__ = 'users'

@@ -1,13 +1,15 @@
+from typing import Annotated, cast
+
 from fastapi import APIRouter, Depends, Query
 from fastapi.exceptions import HTTPException
-from typing import Annotated, cast
-from sqlalchemy import select, or_
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
-from ..database import get_db
-from ..models import User, Category, Item
+
 from ..auth import get_current_user
-from ..schemas import ItemIn, ItemOut, ItemEdit
-from ..enums import Role, ItemStatus, ItemCondition
+from ..database import get_db
+from ..enums import ItemStatus, Role
+from ..models import Category, Item, User
+from ..schemas import ItemEdit, ItemIn, ItemOut
 
 router = APIRouter(prefix='/items', tags=['items'])
 

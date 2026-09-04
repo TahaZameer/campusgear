@@ -1,27 +1,25 @@
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from fastapi import Depends
-import os
-from sqlalchemy.orm import Session
-from sqlalchemy import select
+from datetime import datetime, timedelta, timezone
+from typing import Annotated
+
 import jwt
+from fastapi import Depends
 from fastapi.exceptions import HTTPException
+from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from pwdlib import PasswordHash
-from .schemas import UserIn
-from .models import User
-from datetime import timedelta, datetime, timezone
-from typing import Annotated
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from .config import ALGORITHM, SECRET_KEY
 from .database import get_db
+from .models import User
+from .schemas import UserIn
 
 password_hashing = PasswordHash.recommended()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/login')
 
 DUMMY_HASH = password_hashing.hash('dummypass')
-
-SECRET_KEY = os.environ["SECRET_KEY"]
-
-ALGORITHM = os.environ["ALGORITHM"]
 
 def email_check(email: str, db: Session):
     user = db.scalar(select(User).where(User.email == email))
@@ -73,4 +71,3 @@ def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], db: Annotate
     if user is None:
         raise credential_exception
     return user
-    

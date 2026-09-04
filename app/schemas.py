@@ -1,6 +1,9 @@
-from pydantic import BaseModel, Field, EmailStr
-from datetime import datetime, date
-from .enums import ItemCondition, LoanStatus, LoanEventType
+from datetime import date, datetime
+
+from pydantic import BaseModel, EmailStr, Field
+
+from .enums import ItemCondition, LoanStatus
+
 
 class UserIn(BaseModel):
     full_name: str = Field(min_length=4, max_length=16)

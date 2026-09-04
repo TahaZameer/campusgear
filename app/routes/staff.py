@@ -1,14 +1,22 @@
+from typing import Annotated, cast
+
 from fastapi import APIRouter, Depends, Query
 from fastapi.exceptions import HTTPException
-from typing import Annotated, cast
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from ..database import get_db
+
 from ..auth import get_current_user
-from ..models import User, LoanRequest
-from ..enums import Role, LoanStatus, ItemCondition
+from ..database import get_db
+from ..enums import LoanStatus, Role
+from ..models import LoanRequest, User
 from ..schemas import LoanRequestOut, LoanReturn
-from ..services import approve_request, reject_request, request_checkout, return_loan, overdue_loans
+from ..services import (
+    approve_request,
+    overdue_loans,
+    reject_request,
+    request_checkout,
+    return_loan,
+)
 
 router = APIRouter(prefix='/staff', tags=['staff'])
 

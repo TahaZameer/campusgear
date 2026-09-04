@@ -1,9 +1,11 @@
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from fastapi import FastAPI
-from .database import engine, Base
-from .routes import authentication, category, item, loan, staff, health
+
+from .database import Base, engine
+from .routes import authentication, category, health, item, loan, staff
 
 app = FastAPI()
 

@@ -1,13 +1,15 @@
-from fastapi import APIRouter, Depends, Body
-from fastapi.exceptions import HTTPException
 from typing import Annotated, cast
+
+from fastapi import APIRouter, Body, Depends
+from fastapi.exceptions import HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from ..models import Category, User
-from ..database import get_db
-from ..schemas import CategoryIn, CategoryOut
+
 from ..auth import get_current_user
+from ..database import get_db
 from ..enums import Role
+from ..models import Category, User
+from ..schemas import CategoryIn, CategoryOut
 
 router = APIRouter(prefix='/categories', tags=['categories'])
 

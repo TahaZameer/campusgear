@@ -1,14 +1,16 @@
+from datetime import date
+from typing import Annotated, cast
+
 from fastapi import APIRouter, Depends
 from fastapi.exceptions import HTTPException
-from typing import Annotated, cast
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from ..database import get_db
+
 from ..auth import get_current_user
-from ..models import User, Item, LoanRequest, LoanEvent
-from ..enums import Role, ItemStatus, LoanStatus, LoanEventType
+from ..database import get_db
+from ..enums import ItemStatus, LoanEventType, LoanStatus, Role
+from ..models import Item, LoanEvent, LoanRequest, User
 from ..schemas import LoanRequestIn, LoanRequestOut
-from datetime import date
 
 router = APIRouter(tags=['loans'])
 
