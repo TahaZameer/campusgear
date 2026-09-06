@@ -20,6 +20,8 @@ FastAPI backend for managing campus loans.
 
 ## Setup
 
+### Method 1: Manual Setup
+
 1. Clone the repository
 
 Clone the repository to you local machine and navigate into the project directory:
@@ -64,6 +66,57 @@ uvicorn app.main:app --reload
 The API will be available at:
 http://127.0.0.1:8000/docs
 
+### Method 2: Docker Compose
+
+Prerequisite: Install and start Docker Desktop before proceeding.
+
+Docker Compose automatically sets up the application and PostgreSQL database, so you do not need to install PostgreSQL or configure the database manually.
+
+- Clone the repository
+
+git clone https://github.com/TahaZameer/campusgear.git
+cd campusgear
+
+- Create a .env file
+
+Create a .env file based on the provided .env.example:
+
+cp .env.example .env
+
+Generate a secure JWT secret:
+
+openssl rand -hex 32
+
+Copy the generated value into SECRET_KEY in your .env file.
+
+- Start the application
+
+Build and start the application and PostgreSQL database:
+
+docker compose up --build
+
+The API will be available at:
+
+http://127.0.0.1:8000/docs
+
+- Run the tests (optional)
+
+To run the test suite inside the Docker container:
+
+docker compose exec app sh -c "cd /campusgear && python -m pytest"
+
+The test suite should report:
+
+45 passed
+
+- Stop the application
+
+If the containers are running in the foreground, press Ctrl+C in the terminal where Docker Compose is running.
+
+Alternatively, open a separate terminal and run:
+
+docker compose down
+
 ## Status
 
-Currently in development. Docker support is being added.
+Fully functional. The project supports both manual setup and Docker Compose, with all 45 tests currently passing.
