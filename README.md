@@ -103,7 +103,7 @@ http://127.0.0.1:8000/docs
 
 To run the test suite inside the Docker container:
 
-docker compose exec app sh -c "cd /campusgear && python -m pytest"
+docker compose exec api sh -c "cd /campusgear && python -m pytest"
 
 The test suite should report:
 
