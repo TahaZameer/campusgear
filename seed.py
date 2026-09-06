@@ -8,12 +8,22 @@ from app.auth import password_hashing
 from app.database import LocalSession
 from app.enums import ItemCondition, ItemStatus, Role
 from app.models import Category, Item, User
-
+from sqlalchemy import select
 
 def seed():
     db = LocalSession()
 
     try:
+        existing_admin = db.scalar(
+            select(User).where(User.email == "admin@campusgear.com")
+        )
+
+        if existing_admin:
+            print("Seed data already exists. Skipping.")
+            return
+
+        print("Creating initial seed data...")
+
         # Users
         admin = User(
             full_name="Seed Admin",
@@ -39,12 +49,12 @@ def seed():
         # Categories
         cameras = Category(
             name="Cameras",
-            description="Camera equipment"
+            description="Camera equipment",
         )
 
         laptops = Category(
             name="Laptops",
-            description="Laptop equipment"
+            description="Laptop equipment",
         )
 
         db.add_all([admin, staff, member, cameras, laptops])
